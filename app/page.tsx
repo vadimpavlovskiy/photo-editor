@@ -9,7 +9,7 @@ export default function Home() {
     <MainLayout>
       <HeaderLayout>
         <h1 style={{color: 'white'}}>Photo Editor</h1>
-        <ButtonCustom text="Upload Image" />
+        <ButtonCustom type="file" text="Upload Image" />
       </HeaderLayout>
     </MainLayout>
   )
