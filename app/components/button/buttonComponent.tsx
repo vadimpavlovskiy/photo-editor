@@ -24,7 +24,7 @@ cursor: pointer;
     border: 0.1px solid;
 }
 `
-const ButtonCustom = ({text}:IButton) => {
+const ButtonCustom = ({text}:IButton) => { // Basic Button Component
     return(
         <Button>
             {text}
