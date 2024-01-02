@@ -3,8 +3,9 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 interface IButton {
-    text: string,
-    type: 'button' | 'file'
+    text: string, // Text on Button
+    type: 'button' | 'file', // Button type
+    onClick: React.ChangeEventHandler<HTMLInputElement>; 
 }
 
 const LabelStyled = styled.label`
@@ -29,10 +30,10 @@ cursor: pointer;
     border: 0.1px solid;
 }
 `
-const ButtonCustom = ({text, type}:IButton) => { // Basic Button Component
+const ButtonCustom = ({text, onClick, type}:IButton) => { // Basic Button Component
     return(
         <>
-            <input type={type} id='button' hidden />
+            <input onChange={onClick} type={type} id='button' hidden />
             <LabelStyled htmlFor="button">{text}</LabelStyled>
         </>
     )

@@ -1,16 +1,18 @@
 'use client'
 
-import ButtonCustom from "./components/button/buttonComponent";
+import ImageProvider from "./context/ImageContext";
+import { BodyLayout } from "./layouts/body/bodyLayout";
 import { HeaderLayout } from "./layouts/header/headerLayout";
+import { ImageLayout } from "./layouts/imageLayout/imageLayout";
 import { MainLayout } from "./layouts/mainLayout/mainLayout";
 
 export default function Home() {
   return (
     <MainLayout>
-      <HeaderLayout>
-        <h1 style={{color: 'white'}}>Photo Editor</h1>
-        <ButtonCustom type="file" text="Upload Image" />
-      </HeaderLayout>
+        <ImageProvider>
+          <HeaderLayout />
+          <ImageLayout />
+      </ImageProvider>
     </MainLayout>
   )
 }
