@@ -8,14 +8,13 @@ import { useEffect, useRef, useState } from "react"
 
 export const ImageComponet = ({src}:IImageComponent) => { // Image Component shows image
 const baseCanvas = useRef<HTMLCanvasElement>(null);
-const [isDrawing, setIsDrawing] = useState(false);
 
 useDrawingHook(baseCanvas, src);
 
     return (
     <>
         {/* <img style={{width: '50%', height: '50%'}} alt="Image Selected" src={src} /> */}
-        <canvas ref={baseCanvas} width="1200px" height={'1200px'} /> 
+        <canvas ref={baseCanvas} width={"500px"} height={'500px'} /> 
     </>
 )
 }

@@ -20,7 +20,7 @@ export const HeaderLayout = ({children}:any) => {
         const target = event.target as HTMLInputElement;
         const image = target.files?.[0];
 
-        console.log(image); // Just for debug
+        console.log(image); // Just for debug 
         
 
         if(image !== undefined) {
