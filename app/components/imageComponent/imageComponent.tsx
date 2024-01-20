@@ -1,29 +1,21 @@
 import { IImageComponent } from "@/app/@types/componetnsTypes/imageComponents"
+import { initializeImage } from "@/app/functions/general/initializeImage";
+import { draw } from "@/app/functions/painttool/draw";
+import { useDrawingHook } from "@/app/hooks/useDrawingHook";
 import Image from "next/image"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 
 export const ImageComponet = ({src}:IImageComponent) => { // Image Component shows image
 const baseCanvas = useRef<HTMLCanvasElement>(null);
+const [isDrawing, setIsDrawing] = useState(false);
 
-useEffect(() => {
-    if(baseCanvas.current) {
-        const canvasContext = baseCanvas.current.getContext('2d');
-        const canvasImage = new window.Image();
+useDrawingHook(baseCanvas, src);
 
-        canvasImage.src = src;
-
-        canvasImage.onload = () => {
-            if(baseCanvas) {
-                canvasContext?.drawImage(canvasImage, 0, 0, 500, 500);
-            }
-          };
-    }
-}, [])
     return (
     <>
         {/* <img style={{width: '50%', height: '50%'}} alt="Image Selected" src={src} /> */}
-        <canvas ref={baseCanvas} width="600px" height={'600px'} /> 
+        <canvas ref={baseCanvas} width="1200px" height={'1200px'} /> 
     </>
 )
 }
