@@ -3,9 +3,9 @@ import { IoText } from 'react-icons/io5';
 import { PiStickerLight } from 'react-icons/pi';
 
 export const ToolsData = [
-  { Icon: FaPaintbrush, size: 18, active: false },
-  { Icon: FaRegSquareFull, size: 18, active: false },
-  { Icon: FaRegCircle, size: 18, active: false },
-  { Icon: IoText, size: 18, active: false },
-  { Icon: PiStickerLight, size: 18, active: false },
+  { Icon: FaPaintbrush, size: 18, active: false, name: 'Brush' },
+  { Icon: FaRegSquareFull, size: 18, active: false, name: 'Square' },
+  { Icon: FaRegCircle, size: 18, active: false, name: 'Circle' },
+  { Icon: IoText, size: 18, active: false, name: 'Text' },
+  { Icon: PiStickerLight, size: 18, active: false, name: 'Sticker' },
 ];
