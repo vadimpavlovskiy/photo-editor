@@ -12,16 +12,18 @@ export function draw(
 
   pointsArray.push({ x, y });
 
-  canvasContext!.lineCap = 'round';
-  canvasContext!.lineJoin = 'round';
-  canvasContext!.lineWidth = 5;
-  canvasContext?.beginPath();
+  if (canvasContext) {
+    canvasContext.lineCap = 'round';
+    canvasContext.lineJoin = 'round';
+    canvasContext.lineWidth = 5;
+    canvasContext.beginPath();
 
-  pointsArray.forEach((point: any, index: any) => {
-    {
-      canvasContext!.lineTo(point.x, point.y); // Drawing point to point to prevent gaps
-    }
-  });
-  canvasContext!.stroke();
-  canvasContext?.closePath();
+    pointsArray.forEach((point: any, index: any) => {
+      {
+        canvasContext.lineTo(point.x, point.y); // Drawing point to point to prevent gaps
+      }
+    });
+    canvasContext.stroke();
+    canvasContext.closePath();
+  }
 }

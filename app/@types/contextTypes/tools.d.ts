@@ -7,7 +7,13 @@ export interface ITool {
   name: string;
 }
 
+export interface IActiveTool {
+  name: string;
+  active: boolean;
+}
+
 export type ToolsContextType = {
   tools: ITool[];
   toggleTool: (index: number) => void;
+  selectActiveTool: (tool: any) => void;
 };
