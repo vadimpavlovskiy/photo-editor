@@ -16,6 +16,7 @@ export function draw(
     canvasContext.lineCap = 'round';
     canvasContext.lineJoin = 'round';
     canvasContext.lineWidth = 5;
+
     canvasContext.beginPath();
 
     pointsArray.forEach((point: any, index: any) => {

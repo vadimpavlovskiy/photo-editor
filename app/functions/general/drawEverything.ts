@@ -1,11 +1,11 @@
 import { IActiveTool } from '../../@types/contextTypes/tools';
+import { draw } from '../painttool/draw';
 
 export function drawEverything(activeTool: IActiveTool | null | undefined) {
   switch (activeTool?.name) {
     case 'Brush':
       console.log('This is a brush tool');
-
-      break;
+      return draw;
     case 'Square':
       console.log('This is a square tool');
       break;
@@ -20,7 +20,7 @@ export function drawEverything(activeTool: IActiveTool | null | undefined) {
       break;
     case null:
       console.log('Tool is not selected');
-      break;
+      return null;
   }
   return;
 }

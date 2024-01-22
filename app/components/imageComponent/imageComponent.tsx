@@ -8,12 +8,15 @@ import { useContext, useEffect, useRef, useState } from "react"
 
 
 export const ImageComponet = () => { // Image Component shows image
-    const context = useContext(CanvasContext)
-    if(context?.image) {
+    const canvasContext = useContext(CanvasContext);
+    const toolsContext = useContext(ToolsContext);
+    useDrawingHook(canvasContext?.canvas, canvasContext?.canvasContext.current, toolsContext?.activeTool)
+    
+    if(canvasContext?.image) {
         return (
             <>
                 {/* <img style={{width: '50%', height: '50%'}} alt="Image Selected" src={src} /> */}
-                <canvas ref={context?.canvas} width={"500px"} height={'500px'} /> 
+                <canvas ref={canvasContext?.canvas} width={"500px"} height={'500px'} /> 
             </>
         )
     }

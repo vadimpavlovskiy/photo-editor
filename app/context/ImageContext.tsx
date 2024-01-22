@@ -17,7 +17,7 @@ const ImageProvider = ({ children }: {children: ReactNode}) => {
       const initializedCanvas = canvas.current;
       if(!canvas) return
 
-      const initializedCanvasContext = initializedCanvas?.getContext('2d')
+      const initializedCanvasContext = initializedCanvas?.getContext("2d")
       if (!initializedCanvasContext) return;
 
       canvasContext.current = initializedCanvasContext;
