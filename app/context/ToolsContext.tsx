@@ -19,12 +19,15 @@ export const ToolsProvider = ({children}:any) => {
         })
     }
     const selectActiveTool = (index:number) => {
-        console.log(tools[index]);
-        setActiveTool({name: tools[index].name, active: true})
+        if(tools[index].active) {
+            setActiveTool(null);
+        } else {
+            setActiveTool({name: tools[index].name, active: true})
+        }
     }
 
     return (
-        <ToolsContext.Provider value={{tools, toggleTool, selectActiveTool}}>
+        <ToolsContext.Provider value={{tools, toggleTool, activeTool, selectActiveTool}}>
            {children} 
         </ToolsContext.Provider>
     )

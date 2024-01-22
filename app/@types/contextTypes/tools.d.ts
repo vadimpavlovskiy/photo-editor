@@ -16,4 +16,5 @@ export type ToolsContextType = {
   tools: ITool[];
   toggleTool: (index: number) => void;
   selectActiveTool: (tool: any) => void;
+  activeTool: IActiveTool | null | undefined;
 };

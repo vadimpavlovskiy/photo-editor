@@ -1,7 +1,8 @@
 import { ToolButton } from "@/app/components/toolButton/toolButton";
 import { styled } from "styled-components";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ToolsContext } from "@/app/context/ToolsContext";
+// import { drawEverything } from "@/app/functions/painttool/drawEverything";
 
 
 const ToolsLayoutStyled = styled.div`
@@ -11,7 +12,7 @@ width: max-content;
 
 `
 export const ToolsLayout = ({}) => {
-    const context =  useContext(ToolsContext); // Using global context to manipulate toolsData
+    const context =  useContext(ToolsContext); // Using global context to manipulate toolsData]
     if (context) {
         return (
             <ToolsLayoutStyled>

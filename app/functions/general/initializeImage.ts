@@ -1,6 +1,6 @@
 import { RefObject } from 'react';
 
-export function initializeImage(
+export function initializeCanvasImage(
   baseCanvas: RefObject<HTMLCanvasElement>,
   imageSrc: string,
   canvasContext: CanvasRenderingContext2D | undefined | null,

@@ -3,8 +3,11 @@ export interface IImage {
   id: number;
   image: File;
 }
-export type ImageContextType = {
+export type CanvasContextType = {
   // Image type context
   image: IImage | null;
+  canvas: MutableRefObject<HTMLCanvasElement | null>;
+  canvasContext: MutableRefObject<CanvasRenderingContext2D | null>;
+  initCanvasImage: () => void;
   uploadImage: (image: IImage) => void;
 };

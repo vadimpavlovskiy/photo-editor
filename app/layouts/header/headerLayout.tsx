@@ -1,6 +1,6 @@
-import { ImageContextType } from "@/app/@types/contextTypes/image"
+import { CanvasContextType } from "@/app/@types/contextTypes/image"
 import ButtonCustom from "@/app/components/button/buttonComponent"
-import { ImageContext } from "@/app/context/ImageContext"
+import { CanvasContext } from "@/app/context/ImageContext"
 import { useContext } from "react"
 import { styled } from "styled-components"
 
@@ -14,7 +14,7 @@ justify-content: space-between;
 
 export const HeaderLayout = ({children}:any) => {
     
-    const {uploadImage} = useContext(ImageContext) as ImageContextType;
+    const {uploadImage} = useContext(CanvasContext) as CanvasContextType;
 
     const setImage: React.ChangeEventHandler<HTMLInputElement> = (event) => { // This function handle user input and pass needfull data to context
         const target = event.target as HTMLInputElement;
