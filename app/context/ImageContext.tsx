@@ -9,27 +9,38 @@ const ImageProvider = ({ children }: {children: ReactNode}) => {
   const [image, setImage] = useState<IImage | null>(null);
   const canvas = useRef<HTMLCanvasElement | null>(null);
   const canvasContext = useRef<CanvasRenderingContext2D | null>(null);
+
+  const backgroundCanvas = useRef<HTMLCanvasElement | null>(null);
+  const backgroundCanvasContext = useRef<CanvasRenderingContext2D | null>(null);
+
   const canvasImage = new window.Image();
 
 
   const initCanvasImage = useCallback(
     () => {
+      // Initialized Canvas are resposible for drawing
       const initializedCanvas = canvas.current;
-      if(!canvas) return
+      // Initialized Background Canvas are responsible for background image
+      const initializedBackgroudCanvas = backgroundCanvas.current;
+      if(!backgroundCanvas) return
 
-      const initializedCanvasContext = initializedCanvas?.getContext("2d")
-      if (!initializedCanvasContext) return;
+      const initializedCanvasContext = initializedCanvas?.getContext("2d");
+      const initializedBackgroundCanvasContext = initializedBackgroudCanvas?.getContext("2d");
+
+      if (!initializedCanvasContext || !initializedBackgroundCanvasContext) return;
 
       canvasContext.current = initializedCanvasContext;
+      backgroundCanvasContext!.current = initializedBackgroundCanvasContext;
+      
 
       if(image) {
         const blob = new Blob([image!.image]); // Creating a Blob from image
         const imageUrl = URL.createObjectURL(blob); // Creating a path
 
-        initializeCanvasImage(canvas, imageUrl, canvasContext.current, canvasImage)
+        initializeCanvasImage(backgroundCanvas, imageUrl, backgroundCanvasContext.current, canvasImage)
       }
     },
-    [image],
+    [image, backgroundCanvas, backgroundCanvasContext, canvasImage],
   )
 
   useEffect(() => {
@@ -46,7 +57,9 @@ const ImageProvider = ({ children }: {children: ReactNode}) => {
     canvasContext,
     initCanvasImage,
     uploadImage,
-    image
+    image,
+    backgroundCanvas,
+    backgroundCanvasContext
   }), [initCanvasImage, uploadImage, image])
 
   return <CanvasContext.Provider value={contextValue}>{children}</CanvasContext.Provider>

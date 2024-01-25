@@ -6,6 +6,7 @@ export function initializeCanvasImage(
   canvasContext: CanvasRenderingContext2D | undefined | null,
   canvasImage: HTMLImageElement,
 ) {
+  // This function is filling background canvas with image
   canvasImage.src = imageSrc;
 
   canvasImage.onload = () => {

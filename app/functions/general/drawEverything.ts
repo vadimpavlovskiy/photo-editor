@@ -1,14 +1,14 @@
 import { IActiveTool } from '../../@types/contextTypes/tools';
 import { draw } from '../painttool/draw';
+import { drawRectangle } from '../painttool/rectangle';
 
 export function drawEverything(activeTool: IActiveTool | null | undefined) {
+  // This is switch case conditional functional returning a function base on selected tool
   switch (activeTool?.name) {
     case 'Brush':
-      console.log('This is a brush tool');
       return draw;
     case 'Square':
-      console.log('This is a square tool');
-      break;
+      return drawRectangle;
     case 'Circle':
       console.log('This is a circle tool');
       break;
@@ -16,10 +16,8 @@ export function drawEverything(activeTool: IActiveTool | null | undefined) {
       console.log('This is a text tool');
       break;
     case 'Sticker':
-      console.log('This is a sticker tool');
       break;
     case null:
-      console.log('Tool is not selected');
       return null;
   }
   return;

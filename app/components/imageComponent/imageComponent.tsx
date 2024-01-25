@@ -5,19 +5,33 @@ import { draw } from "@/app/functions/painttool/draw";
 import { useDrawingHook } from "@/app/hooks/useDrawingHook";
 import Image from "next/image"
 import { useContext, useEffect, useRef, useState } from "react"
+import styled from "styled-components";
 
+
+const StyledCanvasContainer = styled.div`
+position: relative;
+height: 500px
+`
+
+const StyledCanvas = styled.canvas`
+position: absolute; top: 0; left: 0;
+`
 
 export const ImageComponet = () => { // Image Component shows image
     const canvasContext = useContext(CanvasContext);
     const toolsContext = useContext(ToolsContext);
+
+    console.log(canvasContext);
+    
     useDrawingHook(canvasContext?.canvas, canvasContext?.canvasContext.current, toolsContext?.activeTool)
     
     if(canvasContext?.image) {
         return (
-            <>
+            <StyledCanvasContainer>
                 {/* <img style={{width: '50%', height: '50%'}} alt="Image Selected" src={src} /> */}
-                <canvas ref={canvasContext?.canvas} width={"500px"} height={'500px'} /> 
-            </>
+                <StyledCanvas ref={canvasContext?.backgroundCanvas} width={"500px"} height={'500px'} /> 
+                <StyledCanvas ref={canvasContext?.canvas} width={"500px"} height={'500px'} /> 
+            </StyledCanvasContainer>
         )
     }
     else {

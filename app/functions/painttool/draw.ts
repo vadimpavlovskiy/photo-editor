@@ -6,6 +6,7 @@ export function draw(
   canvas: RefObject<HTMLCanvasElement>,
   pointsArray: any,
 ) {
+  // This function is respinsible for a free drawing
   const rect = canvas.current?.getBoundingClientRect();
   let x = event.clientX - rect!.left; // Relative to canvas user mouse X axis
   let y = event.clientY - rect!.top; // Relative to canvas user mouse Y axis

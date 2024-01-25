@@ -1,7 +1,9 @@
-import { RefObject, useEffect } from 'react';
+import { RefObject, useContext, useEffect } from 'react';
 import { IActiveTool } from '../@types/contextTypes/tools';
 import { drawEverything } from '../functions/general/drawEverything';
 import { draw } from '../functions/painttool/draw';
+import { IImage } from '../@types/contextTypes/image';
+import { CanvasContext } from '../context/ImageContext';
 
 export function useDrawingHook(
   baseCanvas: RefObject<HTMLCanvasElement>,
@@ -21,7 +23,7 @@ export function useDrawingHook(
       if (isDrawing) {
         if (activeDrawingFunction) {
           console.log('Im acivly drawing');
-          draw(e, canvasContext, baseCanvas, pointsArray);
+          activeDrawingFunction(e, canvasContext, baseCanvas, pointsArray);
         }
         // Using a draw function to free drawing
       }
@@ -30,7 +32,7 @@ export function useDrawingHook(
       baseCanvas.current?.addEventListener('mouseup', (e) => {
         if (isDrawing) {
           if (activeDrawingFunction) {
-            draw(e, canvasContext, baseCanvas, pointsArray); // Using a draw function to free drawing
+            activeDrawingFunction(e, canvasContext, baseCanvas, pointsArray); // Using a draw function to free drawing
           }
           isDrawing = false;
           pointsArray = []; // Here we need to reset array to be able draw from scretch
@@ -43,11 +45,11 @@ export function useDrawingHook(
     baseCanvas.current?.addEventListener('mouseup', handleMouseUp);
 
     return () => {
+      // Delete every listener after dependencies changes such as Tool deactivation or changing the tool
       baseCanvas.current?.removeEventListener('mousedown', handleMouseDown);
       baseCanvas.current?.removeEventListener('mousemove', handleMouseMove);
       baseCanvas.current?.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [activeDrawingFunction, activeTool]);
-
+  }, [activeDrawingFunction, activeTool]); // Tool deactivation or changing the tool
   return;
 }
