@@ -29,7 +29,6 @@ export function useDrawingHook({
     const handleMouseMove = (e: MouseEvent) => {
       if (isDrawing) {
         if (activeDrawingFunction) {
-          console.log('Im acivly drawing');
           activeDrawingFunction(e, canvasContext, baseCanvas, pointsArray);
         }
         // Using a draw function to free drawing
