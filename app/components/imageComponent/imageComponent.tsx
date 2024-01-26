@@ -21,9 +21,13 @@ export const ImageComponet = () => { // Image Component shows image
     const canvasContext = useContext(CanvasContext);
     const toolsContext = useContext(ToolsContext);
 
-    console.log(canvasContext);
+    const hookParams = {
+        backgroundCanvas: canvasContext?.backgroundCanvas,
+        baseCanvas: canvasContext?.canvas,
+        canvasContext: canvasContext?.canvasContext.current,
+        activeTool: toolsContext?.activeTool,    }
     
-    useDrawingHook(canvasContext?.canvas, canvasContext?.canvasContext.current, toolsContext?.activeTool)
+    useDrawingHook(hookParams)
     
     if(canvasContext?.image) {
         return (
