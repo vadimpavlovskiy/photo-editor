@@ -1,6 +1,7 @@
 import React, { createContext, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { IImage, CanvasContextType } from "../@types/contextTypes/image";
 import { initializeCanvasImage } from "../functions/general/initializeImage";
+import { DrownedObjectType } from "../@types/contextTypes/objects";
 
 export const CanvasContext = createContext<CanvasContextType | null>(null); // Created global context to modify file
 
@@ -15,9 +16,13 @@ const ImageProvider = ({ children }: {children: ReactNode}) => {
 
   const canvasImage = new window.Image();
 
+  const [objects, setObjects] = useState<DrownedObjectType[]>([])
+
 
   const initCanvasImage = useCallback(
     () => {
+      console.log('InitCanvasImage triggered!');
+      
       // Initialized Canvas are resposible for drawing
       const initializedCanvas = canvas.current;
       // Initialized Background Canvas are responsible for background image
@@ -40,7 +45,7 @@ const ImageProvider = ({ children }: {children: ReactNode}) => {
         initializeCanvasImage(backgroundCanvas, imageUrl, backgroundCanvasContext.current, canvasImage)
       }
     },
-    [image, backgroundCanvas, backgroundCanvasContext, canvasImage],
+    [image],
   )
 
   useEffect(() => {
@@ -59,8 +64,10 @@ const ImageProvider = ({ children }: {children: ReactNode}) => {
     uploadImage,
     image,
     backgroundCanvas,
-    backgroundCanvasContext
-  }), [initCanvasImage, uploadImage, image])
+    backgroundCanvasContext,
+    objects,
+    setObjects
+  }), [uploadImage, image])
 
   return <CanvasContext.Provider value={contextValue}>{children}</CanvasContext.Provider>
 };

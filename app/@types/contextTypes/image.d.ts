@@ -1,3 +1,6 @@
+import { SetStateAction } from 'react';
+import { DrownedObjectType } from './objects';
+
 export interface IImage {
   // Property of image
   id: number;
@@ -13,4 +16,6 @@ export type CanvasContextType = {
   backgroundCanvasContext: MutableRefObject<CanvasRenderingContext2D | null>;
   initCanvasImage: () => void;
   uploadImage: (image: IImage) => void;
+  objects: DrownedObjectType[];
+  setObjects: Dispatch<SetStateAction>;
 };

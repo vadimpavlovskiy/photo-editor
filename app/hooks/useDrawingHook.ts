@@ -5,43 +5,66 @@ import { draw } from '../functions/painttool/draw';
 import { IImage } from '../@types/contextTypes/image';
 import { CanvasContext } from '../context/ImageContext';
 import { mergeCanvas } from '../functions/general/mergeCanvas';
+import { DrownedObjectType } from '../@types/contextTypes/objects';
 
 export function useDrawingHook({
-  backgroundCanvas,
+  backgroundContext,
   baseCanvas,
   canvasContext,
   activeTool,
+  objects,
+  setObjects,
 }: {
-  backgroundCanvas: RefObject<HTMLCanvasElement>;
+  backgroundContext: CanvasRenderingContext2D;
   baseCanvas: RefObject<HTMLCanvasElement>;
   canvasContext: CanvasRenderingContext2D;
   activeTool: IActiveTool | undefined | null;
+  objects: DrownedObjectType[] | undefined;
+  setObjects: React.Dispatch<React.SetStateAction<DrownedObjectType[]>>;
 }) {
   const activeDrawingFunction = drawEverything(activeTool);
   useEffect(() => {
     let isDrawing = false; // Boolean value to correct work of mouse listener
     let pointsArray: any = []; // Array of points to draw a smooth lines
-
     // We start drawing
-    const handleMouseDown = (e: MouseEvent) => {
+    console.log('UseDrawingHook has been triggered!');
+    console.log(backgroundContext, canvasContext);
+
+    const handleMouseDown = (e: any) => {
       isDrawing = true;
     };
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e: any) => {
       if (isDrawing) {
         if (activeDrawingFunction) {
-          activeDrawingFunction(e, canvasContext, baseCanvas, pointsArray);
+          activeDrawingFunction(
+            e,
+            backgroundContext,
+            canvasContext,
+            baseCanvas,
+            pointsArray,
+            objects,
+            setObjects,
+          );
         }
         // Using a draw function to free drawing
       }
     };
-    const handleMouseUp = (e: MouseEvent) => {
+    const handleMouseUp = (e: any) => {
       baseCanvas.current?.addEventListener('mouseup', (e) => {
         if (isDrawing) {
           if (activeDrawingFunction) {
-            activeDrawingFunction(e, canvasContext, baseCanvas, pointsArray); // Using a draw function to free drawing
+            activeDrawingFunction(
+              e,
+              backgroundContext,
+              canvasContext,
+              baseCanvas,
+              pointsArray,
+              objects,
+              setObjects,
+            ); // Using a draw function to free drawing
           }
           isDrawing = false;
-          mergeCanvas(backgroundCanvas, baseCanvas);
+          // mergeCanvas(backgroundCanvas, baseCanvas);
           // Here I need to put a merge drawing canvas to background canvas
           pointsArray = []; // Here we need to reset array to be able draw from scretch
         }

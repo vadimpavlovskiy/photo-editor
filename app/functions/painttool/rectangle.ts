@@ -2,12 +2,17 @@ import { IImage } from '@/app/@types/contextTypes/image';
 import { log } from 'console';
 import { MouseEvent, RefObject } from 'react';
 import { initializeCanvasImage } from '../general/initializeImage';
+import { drawAllRect } from '../general/drawAllRect';
+import { DrownedObjectType } from '@/app/@types/contextTypes/objects';
 
 export function drawRectangle(
   event: any,
+  backgroundContext: CanvasRenderingContext2D,
   canvasContext: CanvasRenderingContext2D | undefined | null,
   canvas: RefObject<HTMLCanvasElement>,
-  pointsArray: any,
+  pointsArray: { x: number; y: number }[],
+  objects: DrownedObjectType[] | undefined,
+  setObjects: React.Dispatch<React.SetStateAction<DrownedObjectType[]>>,
 ) {
   // This functinon is drawing rectangle
   const rect = canvas.current?.getBoundingClientRect();
@@ -37,6 +42,27 @@ export function drawRectangle(
     canvasContext.fillRect(startX, startY, width, height);
   }
   if (event.type === 'mouseup') {
+    console.log(setObjects);
     canvasContext.closePath();
+    canvasContext.clearRect(
+      // We clear canvas all time to create a drag-n-drop effect
+      0,
+      0,
+      canvas.current!.width,
+      canvas.current!.height,
+    );
+    setObjects((prev: any) => [
+      ...prev,
+      {
+        type: 'rectangle',
+        startX: startX,
+        startY: startY,
+        x: x,
+        y: y,
+        width: width,
+        height: height,
+        context: backgroundContext,
+      },
+    ]);
   }
 }
