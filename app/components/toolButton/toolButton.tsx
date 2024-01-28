@@ -5,7 +5,11 @@ import { styled } from "styled-components"
 
 
 const ToolButtonStyled = styled.div<{active?: boolean}>`
-padding: 16px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 18px;
 border: 1px solid ${props => props.theme.colors.teal};
 background-color: ${props => !props.active || props.theme.colors.teal};
 color: black;

@@ -12,11 +12,7 @@ import { drawAllPoints } from '../functions/general/drawAllPoints';
 import { drawAllText } from '../functions/general/drawAllText';
 
 export function useRedrawingHook(objects: DrownedObjectType[]) {
-  console.log(objects);
-
   useEffect(() => {
-    console.log(objects);
-
     objects.forEach((obj: Ellipse | Rectangle | Draw | Text) => {
       if (obj.type === 'ellipse') {
         drawAllEllipse(obj.startX, obj.startY, obj.x, obj.y, obj.context);

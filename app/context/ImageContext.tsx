@@ -50,7 +50,7 @@ const ImageProvider = ({ children }: {children: ReactNode}) => {
 
   useEffect(() => {
     initCanvasImage()
-  }, [initCanvasImage])
+  }, [initCanvasImage, backgroundCanvasContext])
   
 
   const uploadImage = (newImage: IImage) => { // Function upload image to context
