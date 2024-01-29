@@ -24,6 +24,8 @@ export function useDrawingHook({
 }) {
   const activeDrawingFunction = drawEverything(activeTool);
   useEffect(() => {
+    console.log(baseCanvas);
+
     let isDrawing = false; // Boolean value to correct work of mouse listener
     let pointsArray: any = []; // Array of points to draw a smooth lines
     // We start drawing
@@ -35,8 +37,9 @@ export function useDrawingHook({
     };
     const handleMouseMove = (e: any) => {
       if (isDrawing) {
-        if (activeDrawingFunction) {
-          activeDrawingFunction(
+        console.log(activeDrawingFunction);
+        if (activeDrawingFunction !== null) {
+          activeDrawingFunction!(
             e,
             backgroundContext,
             canvasContext,
@@ -50,25 +53,23 @@ export function useDrawingHook({
       }
     };
     const handleMouseUp = (e: any) => {
-      baseCanvas.current?.addEventListener('mouseup', (e) => {
-        if (isDrawing) {
-          if (activeDrawingFunction) {
-            activeDrawingFunction(
-              e,
-              backgroundContext,
-              canvasContext,
-              baseCanvas,
-              pointsArray,
-              objects,
-              setObjects,
-            ); // Using a draw function to free drawing
-          }
-          isDrawing = false;
-          // mergeCanvas(backgroundCanvas, baseCanvas);
-          // Here I need to put a merge drawing canvas to background canvas
-          pointsArray = []; // Here we need to reset array to be able draw from scretch
+      if (isDrawing) {
+        if (activeDrawingFunction !== null) {
+          activeDrawingFunction!(
+            e,
+            backgroundContext,
+            canvasContext,
+            baseCanvas,
+            pointsArray,
+            objects,
+            setObjects,
+          ); // Using a draw function to free drawing
         }
-      });
+        isDrawing = false;
+        // mergeCanvas(backgroundCanvas, baseCanvas);
+        // Here I need to put a merge drawing canvas to background canvas
+        pointsArray = []; // Here we need to reset array to be able draw from scretch
+      }
     };
 
     baseCanvas.current?.addEventListener('mousedown', handleMouseDown);

@@ -13,10 +13,10 @@ const ImageProvider = ({ children }: {children: ReactNode}) => {
 
   const backgroundCanvas = useRef<HTMLCanvasElement | null>(null);
   const backgroundCanvasContext = useRef<CanvasRenderingContext2D | null>(null);
-
   const canvasImage = new window.Image();
 
   const [objects, setObjects] = useState<DrownedObjectType[]>([])
+  const [activeObject, setActiveObject] = useState(null);
 
 
   const initCanvasImage = useCallback(
@@ -66,6 +66,8 @@ const ImageProvider = ({ children }: {children: ReactNode}) => {
     backgroundCanvas,
     backgroundCanvasContext,
     objects,
+    activeObject,
+    setActiveObject,
     setObjects
   }), [uploadImage, image])
 

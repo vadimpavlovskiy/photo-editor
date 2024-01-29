@@ -4,6 +4,7 @@ import { ToolsContext } from "@/app/context/ToolsContext";
 import { draw } from "@/app/functions/painttool/draw";
 import { useDrawingHook } from "@/app/hooks/useDrawingHook";
 import { useRedrawingHook } from "@/app/hooks/useRedrawingHook";
+import { useSelectHook } from "@/app/hooks/useSelectHook";
 import Image from "next/image"
 import { useContext, useEffect, useRef, useState } from "react"
 import styled from "styled-components";
@@ -32,6 +33,8 @@ export const ImageComponet = () => { // Image Component shows image
     }
     useRedrawingHook(canvasContext!.objects)
     useDrawingHook(hookParams)
+    
+    useSelectHook({baseCanvas: canvasContext?.canvas, activeTool: toolsContext?.activeTool, objects: canvasContext?.objects, activeObject: canvasContext?.activeObject, setActiveObject: canvasContext?.setActiveObject })
     
     if(canvasContext?.image) {
         return (

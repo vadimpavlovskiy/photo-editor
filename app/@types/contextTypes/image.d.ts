@@ -18,4 +18,6 @@ export type CanvasContextType = {
   uploadImage: (image: IImage) => void;
   objects: DrownedObjectType[];
   setObjects: Dispatch<SetStateAction>;
+  activeObject: Object | null;
+  setActiveObject: Dispatch<SetStateAction>;
 };
